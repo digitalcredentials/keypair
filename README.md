@@ -19,9 +19,34 @@
 Extracted from Digital Bazaar's [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld)
 library, and converted to Typescript.
 
+This is an abstract key pair data model, meant to be used in individual subclass
+key pair implementations, such as:
+
+* [`ed25519-verification-key-2020`](https://github.com/digitalcredentials/ed25519-verification-key-2020)
+* [`x25519-key-agreement-key-2020`](https://github.com/digitalcredentials/x25519-key-agreement-key-2020)
+* [`rsa-verification-key-2018`](https://github.com/digitalcredentials/rsa-verification-key-2018)
+
+### Choosing a Key Type
+
+For digital signatures using the
+[`linked-data-integrity`](https://github.com/digitalcredentials/linked-data-integrity) library,
+signing of Verifiable Credentials using [`vc`](https://github.com/digitalcredentials/vc) library,
+authorization capabilities, and DIDAuth operations:
+
+* Prefer **Ed25519VerificationKey2020** type keys, by default.
+* Use **EcdsaSepc256k1** keys if your use case requires it (for example, if
+  you're developing for a Bitcoin-based or Ethereum-based ledger), or if you
+  require Hierarchical Deterministic (HD) wallet functionality.
+
+For key agreement protocols for encryption operations:
+
+* Use **Curve25519** with the [`minimal-cipher`](https://github.com/digitalcredentials/minimal-cipher)
+  library.
+
 ## Security
 
-TBD
+As with most security- and cryptography-related tools, the overall security of
+your system will largely depend on your design decisions.
 
 ## Install
 
@@ -47,7 +72,8 @@ npm install
 
 ## Usage
 
-TBD
+This library is meant to be used only by implementers of new cryptographic key suite
+libraries.
 
 ## Contribute
 
