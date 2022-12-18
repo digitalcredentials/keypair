@@ -1,6 +1,6 @@
 {
-  "name": "@digitalcredentials/isomorphic-lib-template",
-  "description": "A Typescript/Javascript isomorphic library template, for use in the browser, Node.js, and React Native.",
+  "name": "@digitalcredentials/keypair",
+  "description": "Cryptographic key pair data model in Javascript/Typescript, for Node.js, browsers, and React Native. Useful for Verifiable Credentials, DIDs (Decentralized Identifiers), and other uses of Data Integrity.",
   "version": "0.0.1",
   "scripts": {
     "build": "npm run clear && tsc -d && tsc -p tsconfig.esm.json",
@@ -63,7 +63,11 @@
     "spec": "test/**/*.ts"
   },
   "keywords": [
-    "dcc"
+    "dcc",
+    "react native",
+    "keys",
+    "key pair",
+    "cryptography"
   ],
   "engines": {
     "node": ">=16.0"
@@ -75,8 +79,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitalcredentials/isomorphic-lib-template"
+    "url": "https://github.com/digitalcredentials/keypair"
   },
-  "homepage": "https://github.com/digitalcredentials/isomorphic-lib-template",
-  "bugs": "https://github.com/digitalcredentials/isomorphic-lib-template/issues"
+  "homepage": "https://github.com/digitalcredentials/keypair",
+  "bugs": "https://github.com/digitalcredentials/keypair/issues"
 }

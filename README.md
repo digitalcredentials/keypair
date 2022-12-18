@@ -1,9 +1,9 @@
-# Example Isomorphic TS/JS Lib Template _(@digitalcredentials/isomorphic-lib-template)_
+# Cryptographic Key Pair _(@digitalcredentials/keypair)_
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/digitalcredentials/isomorphic-lib-template/main.yml?branch=main)](https://github.com/digitalcredentials/isomorphic-lib-template/actions?query=workflow%3A%22Node.js+CI%22)
-[![NPM Version](https://img.shields.io/npm/v/@digitalcredentials/isomorphic-lib-template.svg)](https://npm.im/@digitalcredentials/isomorphic-lib-template)
+[![Build status](https://img.shields.io/github/actions/workflow/status/digitalcredentials/keypair/main.yml?branch=main)](https://github.com/digitalcredentials/keypair/actions?query=workflow%3A%22Node.js+CI%22)
+[![NPM Version](https://img.shields.io/npm/v/@digitalcredentials/keypair.svg)](https://npm.im/@digitalcredentials/keypair)
 
-> A Typescript/Javascript isomorphic library template, for use in the browser, Node.js, and React Native.
+> Cryptographic key pair data model in Javascript/Typescript, for Node.js, browsers, and React Native. Useful for Verifiable Credentials, DIDs (Decentralized Identifiers), and other uses of Data Integrity.
 
 ## Table of Contents
 
@@ -16,7 +16,8 @@
 
 ## Background
 
-TBD
+Extracted from Digital Bazaar's [`crypto-ld`](https://github.com/digitalbazaar/crypto-ld)
+library, and converted to Typescript.
 
 ## Security
 
@@ -31,7 +32,7 @@ TBD
 To install via NPM:
 
 ```
-npm install @digitalcredentials/isomorphic-lib-template
+npm install @digitalcredentials/keypair
 ```
 
 ### Development
@@ -39,8 +40,8 @@ npm install @digitalcredentials/isomorphic-lib-template
 To install locally (for development):
 
 ```
-git clone https://github.com/digitalcredentials/isomorphic-lib-template.git
-cd isomorphic-lib-template
+git clone https://github.com/digitalcredentials/keypair.git
+cd keypair
 npm install
 ```
 
