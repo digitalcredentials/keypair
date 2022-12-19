@@ -1,4 +1,5 @@
 /*!
  * Copyright (c) 2022 Digital Credentials Consortium. All rights reserved.
  */
-export { Example } from './Example'
+export { KeyPair } from './KeyPair'
+export * from './types'
