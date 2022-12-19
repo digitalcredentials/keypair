@@ -75,8 +75,8 @@ npm install
 This library is meant to be used only by implementers of new cryptographic key suite
 libraries.
 
-When adding support for a new suite type subclass of `keypair`, developers should
-do the following:
+When adding support for a new suite type subclass of `keypair`, developers
+should do the following:
 
 1. Create their own npm package / github repo, such as `example-key-pair`.
 2. Subclass KeyPair.
