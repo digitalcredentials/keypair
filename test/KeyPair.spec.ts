@@ -63,19 +63,6 @@ describe('KeyPair', () => {
     })
   })
 
-  describe('from()', () => {
-    it('should throw an abstract method error', async () => {
-      let error
-
-      try {
-        await ExampleKeyPair.from()
-      } catch (e: any) {
-        error = e
-      }
-      expect(error.message).to.match(/Abstract method/)
-    })
-  })
-
   describe('export()', () => {
     it('should error if neither private or public key specified', async () => {
       const keyPair = new ExampleKeyPair()

@@ -1,5 +1,9 @@
 # keypair Changelog
 
+## 1.0.3 - 2022-12-20
+### Added
+- Export `SerializedKeyPair` interface.
+
 ## 1.0.2 - 2022-12-19
 ### Changed
 - Fix constructor signature.

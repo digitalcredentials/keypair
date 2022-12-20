@@ -2,9 +2,14 @@
  * Copyright (c) 2022 Digital Credentials Consortium. (Conversion to Typescript)
  * Copyright (c) 2028-2022 Digital Bazaar, Inc. All rights reserved.
  */
-import { Signer, VerificationResult, Verifier } from './types'
+import {
+  Signer,
+  VerificationResult,
+  Verifier,
+  SerializedKeyPair
+} from './types'
 
-export abstract class KeyPair {
+export abstract class KeyPair implements SerializedKeyPair {
   id?: string
   type?: string
   controller?: string
@@ -32,16 +37,7 @@ export abstract class KeyPair {
    *   than DID Document key revocation, where a DID controller can revoke a
    *   key from that DID by removing it from the DID Document.)
    */
-  constructor({
-    id,
-    controller,
-    revoked
-  }: {
-    id?: string
-    type?: string
-    controller?: string
-    revoked?: string
-  } = {}) {
+  constructor({ id, controller, revoked }: SerializedKeyPair = {}) {
     this.id = id
     this.type = '' // type must be set by subclasses
     this.controller = controller
@@ -84,13 +80,19 @@ export abstract class KeyPair {
     checkContext = true,
     checkRevoked = true
   }: {
-    document: any
+    document: SerializedKeyPair
     checkContext?: boolean
     checkRevoked?: boolean
   }): Promise<KeyPair> {
     if (checkContext) {
-      const fetchedDocContexts: string[] = [].concat(document['@context'])
-      if (!fetchedDocContexts.includes(this.SUITE_CONTEXT)) {
+      const fetchedDocContexts: string[] = Array.isArray(document['@context'])
+        ? document['@context']
+        : [document['@context'] as string]
+
+      if (
+        !document['@context'] ||
+        !fetchedDocContexts.includes(this.SUITE_CONTEXT)
+      ) {
         throw new Error(
           'Key document does not contain required context "' +
             this.SUITE_CONTEXT +
@@ -99,9 +101,7 @@ export abstract class KeyPair {
       }
     }
     if (checkRevoked && document.revoked) {
-      throw new Error(
-        `Key has been revoked since: "${document.revoked as string}".`
-      )
+      throw new Error(`Key has been revoked since: "${document.revoked}".`)
     }
     return this.from(document)
   }
@@ -120,7 +120,7 @@ export abstract class KeyPair {
    * @returns {Promise<KeyPair>} A LDKeyPair.
    * @throws Unsupported Key Type.
    */
-  static async from(options: any = {}): Promise<KeyPair> {
+  static async from(options: SerializedKeyPair): Promise<KeyPair> {
     throw new Error('Abstract method from() must be implemented in subclass.')
   }
 
@@ -140,11 +140,13 @@ export abstract class KeyPair {
    */
   export({
     publicKey = false,
-    privateKey = false
+    privateKey = false,
+    includeContext = false
   }: {
     publicKey?: boolean
     privateKey?: boolean
-  } = {}): any {
+    includeContext?: boolean
+  } = {}): SerializedKeyPair {
     if (!publicKey && !privateKey) {
       throw new Error(
         'Export requires specifying either "publicKey" or "privateKey".'
