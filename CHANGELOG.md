@@ -1,8 +1,9 @@
 # keypair Changelog
 
-## 1.0.1 - 2022-12-19
+## 1.0.2 - 2022-12-19
 ### Changed
 - Fix constructor signature.
+- Fix type declarations in dist/.
 
 ## 1.0.0 - 2022-12-19
 ### Added
