@@ -35,7 +35,6 @@ export abstract class KeyPair {
   constructor({
     id,
     controller,
-    type,
     revoked
   }: {
     id?: string
@@ -44,7 +43,7 @@ export abstract class KeyPair {
     revoked?: string
   } = {}) {
     this.id = id
-    this.type = type
+    this.type = '' // type must be set by subclasses
     this.controller = controller
     this.revoked = revoked
   }
