@@ -24,10 +24,6 @@ export interface SerializedKeyPair {
   privateKeyJwk?: PrivateKeyJwk
 }
 
-export type GenerateKeyPairOptions = SerializedKeyPair & {
-  seed?: Uint8Array
-}
-
 export interface JsonWebKey {
   crv?: string | undefined;
   d?: string | undefined;

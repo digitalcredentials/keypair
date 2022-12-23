@@ -1,5 +1,9 @@
 # keypair Changelog
 
+## 1.0.4 - 2022-12-22
+### Changed
+- Adjust export compile target.
+
 ## 1.0.3 - 2022-12-20
 ### Added
 - Export `SerializedKeyPair` interface.
