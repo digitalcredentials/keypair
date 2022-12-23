@@ -24,6 +24,11 @@ export interface SerializedKeyPair {
   privateKeyJwk?: PrivateKeyJwk
 }
 
+// Used by the key pair subclass `.generate()` static methods
+export type GenerateKeyPairOptions = SerializedKeyPair & {
+  seed?: Uint8Array
+}
+
 export interface JsonWebKey {
   crv?: string | undefined;
   d?: string | undefined;
