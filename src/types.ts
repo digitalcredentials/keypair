@@ -28,6 +28,23 @@ export type GenerateKeyPairOptions = SerializedKeyPair & {
   seed?: Uint8Array
 }
 
+export interface JsonWebKey {
+  crv?: string | undefined;
+  d?: string | undefined;
+  dp?: string | undefined;
+  dq?: string | undefined;
+  e?: string | undefined;
+  k?: string | undefined;
+  kty?: string | undefined;
+  n?: string | undefined;
+  p?: string | undefined;
+  q?: string | undefined;
+  qi?: string | undefined;
+  x?: string | undefined;
+  y?: string | undefined;
+  [key: string]: unknown;
+}
+
 export interface PublicKeyJwk {
   // Key type, e.g. 'RSA' or 'OKP'
   kty: string
