@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "es2020",
-    "lib": ["es2020", "dom"],
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "dist/esm",
+    "outDir": "dist/",
     "noImplicitAny": true,
     "removeComments": false,
     "preserveConstEnums": true,
@@ -19,8 +19,8 @@
   },
   "include": [
     "src/**/*",
-    ".eslintrc.js",
-    "karma.conf.js"
+    "test/**/*.spec.ts",
+    ".eslintrc.js"
   ],
-  "exclude": ["node_modules", "dist", "test"]
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,13 +1,14 @@
 import { expect } from 'chai'
-import { KeyPair, Signer, VerificationResult, Verifier } from '../src'
+import { KeyPair, VerificationResult } from '../src/KeyPair'
+import { ISigner, IVerifier } from '@digitalcredentials/ssi'
 
 // Because KeyPair is an abstract class, we'll be testing an example subclass
 class ExampleKeyPair extends KeyPair {
-  fingerprint(): string {
+  fingerprint (): string {
     return 'mock fingerprint'
   }
 
-  verifyFingerprint({
+  verifyFingerprint ({
     fingerprint
   }: {
     fingerprint: string
@@ -15,17 +16,17 @@ class ExampleKeyPair extends KeyPair {
     return { verified: false }
   }
 
-  signer(): Signer {
+  signer (): ISigner {
     return {
-      async sign({ data }: { data: Uint8Array }): Promise<Uint8Array> {
+      async sign ({ data }: { data: Uint8Array }): Promise<Uint8Array> {
         return new Uint8Array()
       }
     }
   }
 
-  verifier(): Verifier {
+  verifier (): IVerifier {
     return {
-      async verify({
+      async verify ({
         data,
         signature
       }: {
@@ -72,7 +73,7 @@ describe('KeyPair', () => {
     })
   })
 
-  describe('fromKeyDocument()', async () => {
+  describe('fromKeyDocument()', () => {
     const EXAMPLE_KEY_DOCUMENT = {
       id: 'did:example:1234#z6MkszZtxCmA2Ce4vUV132PCuLQmwnaDD5mw2L23fGNnsiX3',
       controller: 'did:example:1234',
@@ -92,6 +93,7 @@ describe('KeyPair', () => {
       } catch (e: any) {
         error = e
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(error).to.exist
       expect(error.message).to.equal(
         'Abstract method from() must be implemented in subclass.'
@@ -109,6 +111,7 @@ describe('KeyPair', () => {
       } catch (e: any) {
         error = e
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(error).to.exist
 
       expect(error.message)
@@ -136,6 +139,7 @@ describe('KeyPair', () => {
       } catch (e: any) {
         error = e
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(error).to.exist
       expect(error.message).to.contain('revoked')
       expect(error.message).to.contain(pastDate)

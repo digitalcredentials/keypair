@@ -1,15 +1,15 @@
 /*!
- * Copyright (c) 2022 Digital Credentials Consortium. (Conversion to Typescript)
- * Copyright (c) 2028-2022 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2022-2025 Digital Credentials Consortium. (Conversion to Typescript)
+ * Copyright (c) 2018-2022 Digital Bazaar, Inc. All rights reserved.
  */
-import {
-  Signer,
-  VerificationResult,
-  Verifier,
-  SerializedKeyPair
-} from './types'
+import { IKeyPair, IKeyPairCore, ISigner, IVerifier } from '@digitalcredentials/ssi'
 
-export abstract class KeyPair implements SerializedKeyPair {
+export interface VerificationResult {
+  verified: boolean
+  error?: Error
+}
+
+export abstract class KeyPair implements IKeyPairCore {
   id?: string
   type?: string
   controller?: string
@@ -34,10 +34,10 @@ export abstract class KeyPair implements SerializedKeyPair {
    * @param {string} [options.revoked] - Timestamp of when the key has been
    *   revoked, in RFC3339 format. If not present, the key itself is
    *   considered not revoked. (Note that this mechanism is slightly different
-   *   than DID Document key revocation, where a DID controller can revoke a
+   *   from DID Document key revocation, where a DID controller can revoke a
    *   key from that DID by removing it from the DID Document.)
    */
-  constructor({ id, controller, revoked }: SerializedKeyPair = {}) {
+  constructor ({ id, controller, revoked }: IKeyPairCore = {}) {
     this.id = id
     this.type = '' // type must be set by subclasses
     this.controller = controller
@@ -54,7 +54,7 @@ export abstract class KeyPair implements SerializedKeyPair {
    *
    * @returns {Promise<KeyPair>} An LDKeyPair instance.
    */
-  static async generate(options: any = {}): Promise<KeyPair> {
+  static async generate (options: IKeyPair = {}): Promise<KeyPair> {
     throw new Error('Abstract method, must be implemented in subclass.')
   }
 
@@ -75,12 +75,12 @@ export abstract class KeyPair implements SerializedKeyPair {
    * @returns {Promise<KeyPair>} Resolves with the resulting key pair
    *   instance.
    */
-  static async fromKeyDocument({
+  static async fromKeyDocument ({
     document,
     checkContext = true,
     checkRevoked = true
   }: {
-    document: SerializedKeyPair
+    document: IKeyPairCore
     checkContext?: boolean
     checkRevoked?: boolean
   }): Promise<KeyPair> {
@@ -89,10 +89,7 @@ export abstract class KeyPair implements SerializedKeyPair {
         ? document['@context']
         : [document['@context'] as string]
 
-      if (
-        !document['@context'] ||
-        !fetchedDocContexts.includes(this.SUITE_CONTEXT)
-      ) {
+      if (!fetchedDocContexts.includes(this.SUITE_CONTEXT)) {
         throw new Error(
           'Key document does not contain required context "' +
             this.SUITE_CONTEXT +
@@ -100,10 +97,10 @@ export abstract class KeyPair implements SerializedKeyPair {
         )
       }
     }
-    if (checkRevoked && document.revoked) {
-      throw new Error(`Key has been revoked since: "${document.revoked}".`)
+    if (checkRevoked && ((document.revoked ?? '') !== '')) {
+      throw new Error(`Key has been revoked since: "${document.revoked ?? ''}".`)
     }
-    return this.from(document)
+    return await this.from(document)
   }
 
   /**
@@ -120,7 +117,7 @@ export abstract class KeyPair implements SerializedKeyPair {
    * @returns {Promise<KeyPair>} A LDKeyPair.
    * @throws Unsupported Key Type.
    */
-  static async from(options: SerializedKeyPair): Promise<KeyPair> {
+  static async from (options: IKeyPairCore): Promise<KeyPair> {
     throw new Error('Abstract method from() must be implemented in subclass.')
   }
 
@@ -138,7 +135,7 @@ export abstract class KeyPair implements SerializedKeyPair {
    * @returns {object} A public key object
    *   information used in verification methods by signatures.
    */
-  export({
+  export ({
     publicKey = false,
     privateKey = false,
     includeContext = false
@@ -146,18 +143,18 @@ export abstract class KeyPair implements SerializedKeyPair {
     publicKey?: boolean
     privateKey?: boolean
     includeContext?: boolean
-  } = {}): SerializedKeyPair {
+  } = {}): IKeyPair {
     if (!publicKey && !privateKey) {
       throw new Error(
         'Export requires specifying either "publicKey" or "privateKey".'
       )
     }
-    const key: any = {
+    const key: IKeyPair = {
       id: this.id,
       type: this.type,
       controller: this.controller
     }
-    if (this.revoked) {
+    if (this.revoked != null) {
       key.revoked = this.revoked
     }
 
@@ -175,7 +172,7 @@ export abstract class KeyPair implements SerializedKeyPair {
    *
    * @returns {string} The fingerprint.
    */
-  abstract fingerprint(): string
+  abstract fingerprint (): string
 
   /**
    * Verifies that a given key fingerprint matches the public key material
@@ -185,13 +182,12 @@ export abstract class KeyPair implements SerializedKeyPair {
    *
    * @returns {{verified: boolean}} An object with verified flag.
    */
-  abstract verifyFingerprint({
+  abstract verifyFingerprint ({
     fingerprint
   }: {
     fingerprint: string
   }): VerificationResult
 
-  /* eslint-disable max-len */
   /**
    * Returns a signer object for use with
    * [jsonld-signatures]{@link https://github.com/digitalbazaar/jsonld-signatures}.
@@ -205,9 +201,8 @@ export abstract class KeyPair implements SerializedKeyPair {
    *
    * @returns {{sign: Function}} A signer for json-ld usage.
    */
-  abstract signer(): Signer
+  abstract signer (): ISigner
 
-  /* eslint-disable max-len */
   /**
    * Returns a verifier object for use with
    * [jsonld-signatures]{@link https://github.com/digitalbazaar/jsonld-signatures}.
@@ -221,5 +216,5 @@ export abstract class KeyPair implements SerializedKeyPair {
    *
    * @returns {{verify: Function}} Used to verify jsonld-signatures.
    */
-  abstract verifier(): Verifier
+  abstract verifier (): IVerifier
 }

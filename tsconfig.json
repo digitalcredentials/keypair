@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "es2020",
-    "lib": ["es2020", "dom"],
-    "module": "commonjs",
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "module": "es6",
     "moduleResolution": "node",
-    "outDir": "dist/",
+    "outDir": "dist",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
     "noImplicitAny": true,
     "removeComments": false,
     "preserveConstEnums": true,
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "resolveJsonModule": true
   },
   "ts-node": {
@@ -19,8 +23,7 @@
   },
   "include": [
     "src/**/*",
-    ".eslintrc.js",
-    "karma.conf.js"
+    ".eslintrc.cjs"
   ],
   "exclude": ["node_modules", "dist", "test"]
 }
