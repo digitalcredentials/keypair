@@ -1,6 +1,6 @@
 # Cryptographic Key Pair _(@digitalcredentials/keypair)_
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/digitalcredentials/keypair/main.yml?branch=main)](https://github.com/digitalcredentials/keypair/actions?query=workflow%3A%22Node.js+CI%22)
+[![Node.js CI](https://github.com/digitalcredentials/keypair/workflows/Node.js%20CI/badge.svg)](https://github.com/digitalcredentials/keypair/actions?query=workflow%3A%22Node.js+CI%22)
 [![NPM Version](https://img.shields.io/npm/v/@digitalcredentials/keypair.svg)](https://npm.im/@digitalcredentials/keypair)
 
 > Cryptographic key pair data model in Javascript/Typescript, for Node.js, browsers, and React Native. Useful for Verifiable Credentials, DIDs (Decentralized Identifiers), and other uses of Data Integrity.
