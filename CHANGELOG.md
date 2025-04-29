@@ -1,5 +1,9 @@
 # keypair Changelog
 
+## 2.0.1 -
+### Changed
+- Fix naming of `IVerificationResult` export.
+
 ## 2.0.0 - 2025-04-29
 ### Changed
 - **BREAKING**: Refactored to use [`@digitalcredentials/ssi`](https://github.com/digitalcredentials/ssi)

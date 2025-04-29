@@ -4,7 +4,7 @@
  */
 import { IKeyPair, IKeyPairCore, ISigner, IVerifier } from '@digitalcredentials/ssi'
 
-export interface VerificationResult {
+export interface IVerificationResult {
   verified: boolean
   error?: Error
 }
@@ -186,7 +186,7 @@ export abstract class KeyPair implements IKeyPairCore {
     fingerprint
   }: {
     fingerprint: string
-  }): VerificationResult
+  }): IVerificationResult
 
   /**
    * Returns a signer object for use with
