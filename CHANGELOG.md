@@ -1,6 +1,6 @@
 # keypair Changelog
 
-## 2.0.1 -
+## 2.0.1 - 2025-04-29
 ### Changed
 - Fix naming of `IVerificationResult` export.
 

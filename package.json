@@ -1,7 +1,7 @@
 {
   "name": "@digitalcredentials/keypair",
   "description": "Cryptographic key pair data model in Javascript/Typescript, for Node.js, browsers, and React Native. Useful for Verifiable Credentials, DIDs (Decentralized Identifiers), and other uses of Data Integrity.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "build": "npm run clear && tsc -d",
     "clear": "rimraf dist/*",
