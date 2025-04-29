@@ -24,7 +24,6 @@ key pair implementations, such as:
 
 * [`ed25519-verification-key-2020`](https://github.com/digitalcredentials/ed25519-verification-key-2020)
 * [`x25519-key-agreement-key-2020`](https://github.com/digitalcredentials/x25519-key-agreement-key-2020)
-* [`rsa-verification-key-2018`](https://github.com/digitalcredentials/rsa-verification-key-2018)
 
 ### Choosing a Key Type
 
@@ -78,7 +77,7 @@ libraries.
 When adding support for a new suite type subclass of `keypair`, developers
 should do the following:
 
-1. Create their own npm package / github repo, such as `example-key-pair`.
+1. Create their own npm package / Github repo, such as `example-key-pair`.
 2. Subclass KeyPair.
 3. Override relevant methods (such as `export()` and `fingerprint()`).
 4. Add to the key type table in the `crypto-suite-manager` README.md.
