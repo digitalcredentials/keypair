@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { KeyPair, VerificationResult } from '../src/KeyPair'
+import { KeyPair, IVerificationResult } from '../src/KeyPair'
 import { ISigner, IVerifier } from '@digitalcredentials/ssi'
 
 // Because KeyPair is an abstract class, we'll be testing an example subclass
@@ -12,7 +12,7 @@ class ExampleKeyPair extends KeyPair {
     fingerprint
   }: {
     fingerprint: string
-  }): VerificationResult {
+  }): IVerificationResult {
     return { verified: false }
   }
 
