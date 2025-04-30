@@ -4,7 +4,7 @@ module.exports = {
       files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       extends: 'standard-with-typescript',
       parserOptions: {
-        project: './tsconfig.json'
+        project: './tsconfig.spec.json'
       },
       rules: {
         '@typescript-eslint/strict-boolean-expression': 'off'

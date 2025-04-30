@@ -22,8 +22,7 @@
     "files": true
   },
   "include": [
-    "src/**/*",
-    ".eslintrc.cjs"
+    "src/**/*"
   ],
-  "exclude": ["node_modules", "dist", "test"]
+  "exclude": ["node_modules", "dist", "test", ".eslintrc.cjs"]
 }

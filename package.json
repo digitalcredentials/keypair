@@ -1,7 +1,7 @@
 {
   "name": "@digitalcredentials/keypair",
   "description": "Cryptographic key pair data model in Javascript/Typescript, for Node.js, browsers, and React Native. Useful for Verifiable Credentials, DIDs (Decentralized Identifiers), and other uses of Data Integrity.",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "scripts": {
     "build": "npm run clear && tsc -d",
     "clear": "rimraf dist/*",
@@ -17,11 +17,16 @@
     "LICENSE.md"
   ],
   "type": "module",
-  "module": "dist/index.js",
-  "browser": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "dependencies": {
-    "@digitalcredentials/ssi": "^3.0.0"
+    "@digitalcredentials/ssi": "^3.0.4"
   },
   "devDependencies": {
     "@types/chai": "^5.0.1",
