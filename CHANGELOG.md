@@ -1,6 +1,6 @@
 # keypair Changelog
 
-## 3.0.0
+## 3.0.0 - 2025-10-15
 ### Changed
 - **BREAKING**: Updated to [`@digitalcredentials/ssi`](https://github.com/digitalcredentials/ssi)
   `v5.0.0` -- `signer.id` is now required.
