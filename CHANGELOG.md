@@ -1,5 +1,10 @@
 # keypair Changelog
 
+## 3.0.0
+### Changed
+- **BREAKING**: Updated to [`@digitalcredentials/ssi`](https://github.com/digitalcredentials/ssi)
+  `v5.0.0` -- `signer.id` is now required.
+
 ## 2.0.1-2.0.5 - 2025-04-29
 ### Changed
 - Fix naming of `IVerificationResult` export.
